@@ -18,7 +18,9 @@ namespace HelloEventDelegates
             
             workerDemo.WorkPerformed2 += new EventHandler<WorkPerformedEventArgs>(WorkPerformedFrameWork.WorkPerformed1);
             workerDemo.WorkPerformed2 += /*new EventHandler<WorkPerformedEventArgs>*/(WorkPerformedFrameWork.WorkPerformed2); // This also works, C# compiler will infer the corret delegate
-
+            workerDemo.WorkPerformed2 += (s, e) => {
+                System.Console.WriteLine("Can also use lambdas for handler function definition...!");
+            }; 
 
             System.Console.WriteLine("Initializing works....");
             workerDemo.DoWork(12, WorkType.GenerateReports);

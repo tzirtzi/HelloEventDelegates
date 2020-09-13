@@ -1,8 +1,16 @@
-﻿namespace HelloEventDelegates
+﻿using System;
+
+namespace HelloEventDelegates
 {
 
     public static class WorkPerformedFrameWork
     {
+
+        public static void DynamicWorkPerformed1(int hours, WorkType workType, Action<int, WorkType> del )
+        {
+            del(hours, workType);
+        }
+
         public static void WorkPerformed1(int hours, WorkType workType)
         {
             System.Console.WriteLine($"Work Performed 1 fired with data: {hours} {workType}");
