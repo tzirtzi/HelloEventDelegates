@@ -14,7 +14,11 @@ namespace HelloEventDelegates
             System.Console.WriteLine("Registering listeners....");
 
             workerDemo.WorkPerformed += new WorkPerformedWithReturnValueHandler(WorkPerformedFrameWork.WorkPerformed4);
-            workerDemo.WorkPerformed += new WorkPerformedWithReturnValueHandler(WorkPerformedFrameWork.WorkPerformed5);
+            workerDemo.WorkPerformed += /*new WorkPerformedWithReturnValueHandler*/(WorkPerformedFrameWork.WorkPerformed5);
+            
+            workerDemo.WorkPerformed2 += new EventHandler<WorkPerformedEventArgs>(WorkPerformedFrameWork.WorkPerformed1);
+            workerDemo.WorkPerformed2 += /*new EventHandler<WorkPerformedEventArgs>*/(WorkPerformedFrameWork.WorkPerformed2); // This also works, C# compiler will infer the corret delegate
+
 
             System.Console.WriteLine("Initializing works....");
             workerDemo.DoWork(12, WorkType.GenerateReports);
