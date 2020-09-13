@@ -32,15 +32,18 @@ namespace HelloEventDelegates
             System.Console.WriteLine("... Second subcase: Pass a locally defined delegate to a framework process to do work");
             
             Action<int, WorkType> myAction = (hours, worktype) => {
-                System.Console.WriteLine("This is work done on framework dynamic process, from a locally defined function...");
-                System.Console.WriteLine($"Processing data {hours} hours of {worktype}! ... done!");
+                System.Console.WriteLine("This is work done on framework dynamic process, from a locally defined function (myAction)...");
+                System.Console.WriteLine($"Processing data {hours} hours of {worktype}! ... myAction done!");
             };
-            Action<int, WorkType> myOtherAction = (hours, worktype) => {
-                System.Console.WriteLine("This is work done on framework dynamic process, from a locally defined function...");
-                System.Console.WriteLine($"Processing data {hours} hours of {worktype} ... done!");
+            Func<int, WorkType, bool> myOtherAction = (hours, worktype) => {
+                System.Console.WriteLine("This is work done on framework dynamic process, from a locally defined function (myOtherAction)...");
+                System.Console.WriteLine($"Processing data {hours} hours of {worktype} ... myOtherAction done!");
+                return true;
             };
 
-            WorkPerformedFrameWork.DynamicWorkPerformed1(12, WorkType.GoToMeetings, myAction);
+            WorkPerformedFrameWork.DynamicWorkPerformed1(myAction, 12, WorkType.GoToMeetings);
+            var res = WorkPerformedFrameWork.DynamicWorkPerformed1(myOtherAction, 12, WorkType.GoToMeetings);
+            System.Console.WriteLine($" ---> Result from last delegate invocation {res}");
         }
         static void DoTask(WorkPerformedHandler del, int hours, WorkType workType)
         {

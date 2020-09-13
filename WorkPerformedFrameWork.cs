@@ -6,9 +6,13 @@ namespace HelloEventDelegates
     public static class WorkPerformedFrameWork
     {
 
-        public static void DynamicWorkPerformed1(int hours, WorkType workType, Action<int, WorkType> del )
+        public static void DynamicWorkPerformed1(Action<int, WorkType> del, int hours, WorkType workType)
         {
             del(hours, workType);
+        }
+        public static bool DynamicWorkPerformed1(Func<int, WorkType, bool> del, int hours, WorkType workType)
+        {
+            return del(hours, workType);
         }
 
         public static void WorkPerformed1(int hours, WorkType workType)
